@@ -5,41 +5,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.heaven7.android.container.item.TextItem;
+
 public class TextContainer extends BaseContainer {
 
-    private int mLayoutId;
-    private int mTextViewId;
-    private CharSequence mText;
-    private OnContainerClickListener mClickListener;
+    private TextItem item;
 
-    public OnContainerClickListener getOnContainerClickListener() {
-        return mClickListener;
+    public TextItem getItem() {
+        return item;
     }
-    public void setOnContainerClickListener(OnContainerClickListener mClickListener) {
-        this.mClickListener = mClickListener;
-    }
-    public int getLayoutId() {
-        return mLayoutId;
-    }
-    public void setLayoutId(int mLayoutId) {
-        this.mLayoutId = mLayoutId;
-    }
-    public int getTextViewId() {
-        return mTextViewId;
-    }
-    public void setTextViewId(int mTextViewId) {
-        this.mTextViewId = mTextViewId;
+    public void setItem(TextItem item) {
+        this.item = item;
     }
 
-    public CharSequence getText() {
-        return mText;
-    }
-    public void setText(CharSequence mText) {
-        this.mText = mText;
-    }
     public TextView getTextView(){
         final View view = getView();
-        int textViewId = getTextViewId();
+        int textViewId = item.getTextViewId();
         TextView tv;
         if (textViewId == 0) {
             tv = (TextView) view;
@@ -50,24 +31,24 @@ public class TextContainer extends BaseContainer {
     }
     @Override
     public View onCreateView(ViewGroup parent, LayoutInflater layoutInflater) {
-        return layoutInflater.inflate(getLayoutId(), parent, false);
+        return layoutInflater.inflate(item.getLayoutId(), parent, false);
     }
     @Override
     public void onAttach() {
         TextView view = getTextView();
-        view.setText(getText());
-        if(mClickListener != null){
+        view.setText(item.getText());
+        if(item.getOnContainerClickListener() != null){
             getView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mClickListener.onClick(TextContainer.this, view);
+                    item.getOnContainerClickListener().onClick(TextContainer.this, view);
                 }
             });
         }
     }
     @Override
     public void onDetach() {
-        if(mClickListener != null){
+        if(item.getOnContainerClickListener() != null){
             getView().setOnClickListener(null);
         }
     }

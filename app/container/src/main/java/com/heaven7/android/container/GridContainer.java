@@ -4,41 +4,25 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 
+import com.heaven7.android.container.item.GridItem;
+
 public class GridContainer extends MultiContainer {
 
-    private int columnCount;
-    private int rowCount;
-    private int orientation = GridLayout.VERTICAL;
+    private GridItem item;
 
-    public int getColumnCount() {
-        return columnCount;
+    public GridItem getItem() {
+        return item;
     }
-    public void setColumnCount(int columnCount) {
-        this.columnCount = columnCount;
-    }
-
-    public int getRowCount() {
-        return rowCount;
-    }
-
-    public void setRowCount(int rowCount) {
-        this.rowCount = rowCount;
-    }
-
-    public int getOrientation() {
-        return orientation;
-    }
-
-    public void setOrientation(int orientation) {
-        this.orientation = orientation;
+    public void setItem(GridItem item) {
+        this.item = item;
     }
 
     @Override
     protected ViewGroup createLayout(ViewGroup parent, LayoutInflater inflater){
         GridLayout gl = new GridLayout(parent.getContext());
-        gl.setColumnCount(columnCount);
-        gl.setRowCount(rowCount);
-        gl.setOrientation(orientation);
+        gl.setColumnCount(item.getColumnCount());
+        gl.setRowCount(item.getRowCount());
+        gl.setOrientation(item.getOrientation());
         return gl;
     }
 
