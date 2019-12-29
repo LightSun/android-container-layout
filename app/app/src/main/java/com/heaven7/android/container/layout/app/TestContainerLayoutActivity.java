@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 
 import com.heaven7.android.container.ContainerLinearLayout;
-import com.heaven7.android.container.VerticalTextsContainer;
+import com.heaven7.android.container.TextListContainer;
 
 import java.util.Arrays;
 
@@ -23,7 +23,7 @@ public class TestContainerLayoutActivity extends BaseActivity {
     @Override
     protected void onInit(Context context, Bundle savedInstanceState) {
 
-        mContainer.addChild(new VerticalTextsContainer(R.layout.container_simple_text,
+        mContainer.addChild(new TextListContainer(R.layout.container_simple_text,
                 Arrays.asList("Hello World!",
                         "Hello Goggle!",
                         "Hello Container Layout")));

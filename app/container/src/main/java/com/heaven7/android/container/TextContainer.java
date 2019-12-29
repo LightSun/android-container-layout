@@ -10,14 +10,20 @@ public class TextContainer extends BaseContainer {
     private int mLayoutId;
     private int mTextViewId;
     private CharSequence mText;
+    private OnContainerClickListener mClickListener;
 
+    public OnContainerClickListener getOnContainerClickListener() {
+        return mClickListener;
+    }
+    public void setOnContainerClickListener(OnContainerClickListener mClickListener) {
+        this.mClickListener = mClickListener;
+    }
     public int getLayoutId() {
         return mLayoutId;
     }
     public void setLayoutId(int mLayoutId) {
         this.mLayoutId = mLayoutId;
     }
-
     public int getTextViewId() {
         return mTextViewId;
     }
@@ -31,14 +37,7 @@ public class TextContainer extends BaseContainer {
     public void setText(CharSequence mText) {
         this.mText = mText;
     }
-
-    @Override
-    public View onCreateView(ViewGroup parent, LayoutInflater layoutInflater) {
-        return layoutInflater.inflate(getLayoutId(), parent, false);
-    }
-
-    @Override
-    public void onAttach() {
+    public TextView getTextView(){
         final View view = getView();
         int textViewId = getTextViewId();
         TextView tv;
@@ -47,10 +46,30 @@ public class TextContainer extends BaseContainer {
         } else {
             tv = view.findViewById(textViewId);
         }
-        tv.setText(getText());
+        return tv;
+    }
+    @Override
+    public View onCreateView(ViewGroup parent, LayoutInflater layoutInflater) {
+        return layoutInflater.inflate(getLayoutId(), parent, false);
+    }
+    @Override
+    public void onAttach() {
+        TextView view = getTextView();
+        view.setText(getText());
+        if(mClickListener != null){
+            getView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mClickListener.onClick(TextContainer.this, view);
+                }
+            });
+        }
     }
     @Override
     public void onDetach() {
+        if(mClickListener != null){
+            getView().setOnClickListener(null);
+        }
     }
 }
 //animate test ok on onAttach.

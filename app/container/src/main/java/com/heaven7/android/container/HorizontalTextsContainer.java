@@ -2,7 +2,7 @@ package com.heaven7.android.container;
 
 import java.util.List;
 
-public class HorizontalTextsContainer extends HorizontalContainer {
+public class HorizontalTextsContainer extends LinearContainer {
 
     public HorizontalTextsContainer(int layoutId, int textViewId, List<? extends CharSequence> texts) {
         for (CharSequence cs: texts){
