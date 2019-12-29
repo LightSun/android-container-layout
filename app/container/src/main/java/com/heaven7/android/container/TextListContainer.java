@@ -1,6 +1,7 @@
 package com.heaven7.android.container;
 
 import com.heaven7.android.container.factory.ITextContainerFactory;
+import com.heaven7.android.container.factory.TextContainerFactory;
 import com.heaven7.android.container.item.TextItem;
 
 import java.util.List;
@@ -9,8 +10,11 @@ public class TextListContainer extends LinearContainer {
 
     public TextListContainer(List<TextItem> list, ITextContainerFactory factory) {
         super();
+        if(factory == null){
+            factory = TextContainerFactory.DEFAULT;
+        }
         for (TextItem ti : list){
-            TextContainer container = factory != null ? factory.create() : new TextContainer();
+            TextContainer container = factory.create();
             container.setItem(ti);
             addContainer(container);
         }
