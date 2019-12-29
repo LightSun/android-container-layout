@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class MultiContainer extends BaseContainer {
@@ -22,6 +23,9 @@ public abstract class MultiContainer extends BaseContainer {
     }
     public void removeContainer(Container container){
         cells.remove(container);
+    }
+    public void addContainers(Collection<? extends Container> coll){
+        cells.addAll(coll);
     }
 
     protected abstract ViewGroup createLayout(ViewGroup parent, LayoutInflater inflater);

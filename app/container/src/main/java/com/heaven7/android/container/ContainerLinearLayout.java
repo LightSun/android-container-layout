@@ -93,7 +93,7 @@ public class ContainerLinearLayout extends LinearLayout{
         mCM.dispatchChildAttached(index);
     }
     @Override
-    public void removeViewAt( int index) {
+    public void removeViewAt(int index) {
         mCM.dispatchChildDetached(index);
         super.removeViewAt(index);
     }

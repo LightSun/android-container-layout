@@ -8,15 +8,16 @@ import static android.widget.LinearLayout.HORIZONTAL;
 
 public class LinearContainer extends MultiContainer {
 
-    private int orientation;
-
-    public LinearContainer(int orientation) {
-        super();
-        this.orientation = orientation;
-    }
+    private int orientation = HORIZONTAL;
 
     public LinearContainer() {
-        this(HORIZONTAL);
+        super();
+    }
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
+    public int getOrientation() {
+        return orientation;
     }
 
     protected ViewGroup.LayoutParams generateLayoutParams() {
